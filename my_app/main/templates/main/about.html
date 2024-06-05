@@ -6,15 +6,19 @@
 {% endblock  %}
 
 {% block  content %}
-    <h1 class="mt-5 pt-5"><strong>{{ context }}</strong></h1>
+    <div class="mt-5 p-5 bg-light custom-shadow ">
+        <h2 class="pt-5"><strong>{{ context }}</strong></h2>
+        <p class="m-2">{{ text_on_page }}</p>
+    </div>
 {% endblock  %}
 
 {% block footer %}
     <footer class="py-4 bg-dark">
         <div class="container">
             <p class="m-0 text-center text-white">
-                {{ footer_text }}
-            </p>
+				{{ footer_text }}
+			</p>
         </div>
     </footer>
 {% endblock  %}
+
