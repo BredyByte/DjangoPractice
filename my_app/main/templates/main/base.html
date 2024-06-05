@@ -16,6 +16,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{% static "deps/favicon/favicon-32x32.png" %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static "deps/favicon/favicon-16x16.png" %}">
     <link rel="manifest" href="{% static "deps/favicon/site.webmanifest" %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
     <title>{{ title }}</title>
 </head>
 
@@ -23,7 +24,7 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
             <div class="container">
-                <a class="navbar-brand" href="index.html">Home</a>
+                <a class="navbar-brand" href="{% url "main:index" %}">Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -32,14 +33,15 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown ">
-                            <a class="nav-link dropdown-toggle text-white" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class=" btn btn-primary nav-link dropdown-toggle text-white d-flex align-items-center" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuButton">
                                 Информация
+                                <i class="bi bi-caret-down-fill ms-2" id="dropdownIcon"></i>
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item  text-white" href="#">Доставка и оплата</a></li>
                                 <li><a class="dropdown-item  text-white" href="#">Контактная информация</a></li>
-                                <li><a class="dropdown-item  text-white" href="#">Про нас</a></li>
+                                <li><a class="dropdown-item  text-white" href="{% url "main:about" %}">About</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -177,8 +179,9 @@
                     <!-- Пустой блок на Ваше усмотрение -->
                 </div>
                 <div class="col-lg-10">
-                    <!-- Контент на странице -->
-					{% block content %}{% endblock  %}
+                    <div class="mt-5 p-5 bg-light custom-shadow ">
+                        {% block content %}{% endblock  %}
+                    </div>
 				</div>
             </div>
         </div>

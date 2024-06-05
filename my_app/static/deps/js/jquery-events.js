@@ -1,3 +1,16 @@
+$(document).ready(function() {
+    $('#dropdownMenuButton').on('click', function() {
+        var $dropdownIcon = $('#dropdownIcon');
+        setTimeout(function() {
+            if ($('#dropdownMenuButton').attr('aria-expanded') === 'true') {
+                $dropdownIcon.css('transform', 'rotate(180deg)');
+            } else {
+                $dropdownIcon.css('transform', 'rotate(0deg)');
+            }
+        }, 0);
+    });
+});
+
 // Когда html документ готов (прорисован)
 $(document).ready(function () {
     // Берем из разметки элемент по id - оповещения от django
