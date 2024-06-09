@@ -1,8 +1,10 @@
 
 import re
 from tkinter import N
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import Http404, HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views import generic
+from . import views
 
 from goods.models import Categories, Products
 
@@ -71,23 +73,13 @@ def catalog(request):
 
 	return render(request, 'goods/catalog.html', get_catalog_context())
 
+class MyTestView(generic.ListView):
+	template_name = "goods/testPage.html"
+	context_object_name = "categ_list"
+
+	def get_queryset(self):
+		return Categories.objects.all()
+
+
 def product(request):
 	return render(request, 'goods/product.html')
-
-
-# python manage.py shell
-# >>> from goods.models import Categories
-# >>> c = Categories.objects.get(name="Some Name") - get some row from db
-# >>> c.delete() - delete this row from db
-# >>> c = Categories(name="SOME nmae", slug="Here other info") - create new instance of row
-# >>> c.save() - add this new c to db
-# >>> Categories.objects.all() - return all db rows
-def some(request):
-	#Method Categories.objects.all() returns QuerySet
-	#Which is an iterable object containing instances of the Categories model.
-	c = Categories.objects.all()
-	c_list = [{'name': category.name, 'slug': category.slug} for category in c]
-	context = {
-		'categ': c_list
-	}
-	return render(request, 'goods/some.html', context)
