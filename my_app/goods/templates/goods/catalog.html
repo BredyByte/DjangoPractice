@@ -45,27 +45,27 @@
 			</form>
 		</div>
 
-		{% for i in products %}
+		{% for product in products %}
 			<div class="col-lg-4 col-md-6 p-4">
 				<div class="card border-primary rounded custom-shadow">
-					{% if i.image %}
-						<img src="{% static i.image %}" class="card-img-top" alt="...">
-						{% else %}
-						<img src="{% static '/deps/images/Not found image.png' %}" class="card-img-top" alt="...">
+					{% if product.image %}
+						<img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.image.name }}">
+					{% else %}
+						<img src="{% static 'deps/images/Not found image.png' %}" class="card-img-top" alt="Not found image">
 					{% endif %}
 					<div class="card-body">
 						<a href="#">
-							<p class="card-title">{{ i.title }}</p>
+							<p class="card-title">{{ product.name }}</p>
 						</a>
-						<p class="card-text text-truncate">{{ i.description }}</p>
-						<p class="product_id">{{ i.id }}</p>
+						<p class="card-text text-truncate">{{ product.description }}</p>
+						<p class="product_id">{{ product.id }}</p>
 						<div class="d-flex justify-content-between">
-							{% if i.discount %}
-								<p><s>{{ i.price }}</s> $</p>
-								<p><strong>{{ i.discounted_price }} $</strong></p>
-								<span class="badge bg-warning text-dark">Скидка {{ i.discount }} %</span>
+							{% if product.discount %}
+								<p><s>{{ product.price }}</s> $</p>
+								<p><strong>{{ product.discounted_price }} $</strong></p>
+								<span class="badge bg-warning text-dark">Скидка {{ product.discount }} %</span>
 							{% else %}
-							<p><strong>{{ i.price }} $</strong></p>
+							<p><strong>{{ product.price }} $</strong></p>
 							{% endif %}
 							<a href="#" class="btn add-to-cart">
 								<img class="mx-1" src="{% static "deps/icons/cart-plus.svg" %}" alt="Catalog Icon"
