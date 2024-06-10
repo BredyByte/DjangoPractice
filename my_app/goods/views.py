@@ -11,19 +11,10 @@ from goods.models import Categories, Products
 def catalog(request):
 	products = Products.objects.all()
 
-	modified_products = []
-
-	for product in products:
-		discount = product.discount
-		if discount:
-			discounted_price = product.price - (product.price * discount / 100)
-			product.discount_price = discounted_price
-		modified_products.append(product)
-
 	context = {
 		'title': 'Catalog',
 		'description': 'This page is about bla bla, and other blabla blog',
-		'products': modified_products
+		'products': products
 	}
 
 	return render(request, 'goods/catalog.html', context)

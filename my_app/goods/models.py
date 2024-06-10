@@ -45,3 +45,9 @@ class Products(models.Model):
 	# This function modifies that behavior.
 	def __str__(self):
 		return f'{self.name} Cantidad - {self.quantity}'
+
+	def display_id(self):
+		return f'{self.id:05}'
+
+	def display_discounted_price(self):
+		return round(self.price - (self.price * self.discount / 100), 2)
