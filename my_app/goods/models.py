@@ -40,6 +40,7 @@ class Products(models.Model):
 		db_table = 'product'
 		verbose_name = 'Producto'
 		verbose_name_plural = 'Productos'
+		ordering = ("id",)
 
 	# When creating a row using this class, it appears as 'Object1' in the Admin panel.
 	# This function modifies that behavior.
