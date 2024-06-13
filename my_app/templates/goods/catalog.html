@@ -11,9 +11,9 @@
 	<!-- Контент на странице -->
 	<div class="row">
 		{% if request.GET.q %}
-			<h3>Результат поиск по запросу {{ request.GET.q }} :</h3>
+			<h3>Searching result is {{ request.GET.q }} :</h3>
 			{% if not products %}
-				<h2>Ничего не найдено</h2>
+				<h2>Nothing is found</h2>
 			{% endif %}
 		{% endif %}
 		{% if products %}
@@ -21,7 +21,7 @@
 			<div class="dropdown mb-2">
 				<button class="btn btn-secondary dropdown-toggle btn-dark" type="button" data-bs-toggle="dropdown"
 					aria-expanded="false">
-					Фильтры
+					Filters
 				</button>
 				<form action="{% if request.GET.q %}{% url "catalog:search" %}{% else %}{% url "catalog:index" slug_url %}{% endif %}"
 					method="get" class="dropdown-menu bg-dark" data-bs-theme="dark">
@@ -34,17 +34,17 @@
 								<input type="hidden" name="q" value="{{ request.GET.q }}">
 							{% endif %}
 						<label class="form-check-label" for="flexCheckDefault">
-							Товары по акции
+							Discounted products
 						</label>
 					</div>
-					<p class="text-white mx-3 mt-3">Сортировать:</p>
+					<p class="text-white mx-3 mt-3">Sort:</p>
 					<div class="form-check text-white mx-3">
 						<input class="form-check-input" type="radio" name="order_by"
 							id="flexRadioDefault1" value="default"
 							{% if not request.GET.order_by or request.GET.order_by == 'default' %}checked{% endif %}
 							>
 						<label class="form-check-label" for="flexRadioDefault1">
-							По умолчанию
+							By defoult
 						</label>
 					</div>
 					<div class="form-check text-white mx-3">
@@ -53,7 +53,7 @@
 							{% if request.GET.order_by == 'price' %}checked{% endif %}
 							>
 						<label class="form-check-label" for="flexRadioDefault2">
-							От дешевых к дорогим
+							From cheap to expensive
 						</label>
 					</div>
 					<div class="form-check text-white mx-3">
@@ -62,10 +62,10 @@
 							{% if request.GET.order_by == '-price' %}checked{% endif %}
 							>
 						<label class="form-check-label" for="flexRadioDefault3">
-							От дорогих к дешевым
+							From expensive to cheap
 						</label>
 					</div>
-					<button type="submit" class="btn btn-primary mx-3 mt-3">Применить</button>
+					<button type="submit" class="btn btn-primary mx-3 mt-3">Apply</button>
 				</form>
 			</div>
 			<!-- Карточки товаров -->
@@ -103,7 +103,7 @@
 								{% if product.discount %}
 									<p><s>{{ product.price }}</s> $</p>
 									<p><strong>{{ product.display_discounted_price }} $</strong></p>
-									<span class="badge bg-warning text-dark">Скидка {{ product.discount }} %</span>
+									<span class="badge bg-warning text-dark">Discount {{ product.discount }} %</span>
 								{% else %}
 									<p><strong>{{ product.price }} $</strong></p>
 								{% endif %}
@@ -144,7 +144,7 @@
 
 					</div>
 				</ul>
-w			</nav>
+			</nav>
 		{% endif %}
 	</div>
 {% endblock %}
