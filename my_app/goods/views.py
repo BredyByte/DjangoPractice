@@ -1,11 +1,7 @@
 
-import re
-from tkinter import N
 from django.core.paginator import Paginator
-from django.http import Http404, HttpResponse
-from django.shortcuts import get_list_or_404, get_object_or_404, redirect, render
-from django.views import generic
-from goods.models import Categories, Products
+from django.shortcuts import get_list_or_404, render
+from goods.models import Products
 from goods.utils import q_search
 
 def catalog(request, category_slug=None):
