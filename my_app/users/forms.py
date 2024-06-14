@@ -1,6 +1,23 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from users.models import User
+
+class ProfileForm(UserChangeForm):
+	class Meta:
+		model = User
+		fields = (
+			'image',
+			'first_name',
+			'last_name',
+			'username',
+			'email',
+		)
+
+	image = forms.ImageField(required=False)
+	first_name = forms.CharField()
+	last_name = forms.CharField()
+	username = forms.CharField()
+	email = forms.CharField()
 
 class UserRegistrationForm(UserCreationForm):
 	class Meta:
@@ -13,14 +30,66 @@ class UserRegistrationForm(UserCreationForm):
 			'password1',
 			'password2',
 		)
-
 	first_name = forms.CharField()
 	last_name = forms.CharField()
 	username = forms.CharField()
 	email = forms.CharField()
 	password1 = forms.CharField()
 	password2 = forms.CharField()
-
+	"""
+	В данном случае можно настроить в ручную данные,
+	как есть в примере ниже, и использовать for во фронте беря данные от сюда,
+	но пролбема такого подхода в том, что при изменении чего-то, что касается фронта,
+	человеку придется лезть в бек - тоесть сюда, чтобы изменить например плейсхолдер
+	"""
+	# first_name = forms.CharField(
+    #     widget=forms.TextInput(
+    #         attrs={
+    #             "class": "form-control",
+    #             "placeholder": "Введите ваше имя",
+    #         }
+    #     )
+    # )
+    # last_name = forms.CharField(
+    #     widget=forms.TextInput(
+    #         attrs={
+    #             "class": "form-control",
+    #             "placeholder": "Введите вашу фамилию",
+    #         }
+    #     )
+    # )
+    # username = forms.CharField(
+    #     widget=forms.TextInput(
+    #         attrs={
+    #             "class": "form-control",
+    #             "placeholder": "Введите ваше имя пользователя",
+    #         }
+    #     )
+    # )
+    # email = forms.CharField(
+    #     widget=forms.EmailInput(
+    #         attrs={
+    #             "class": "form-control",
+    #             "placeholder": "Введите ваш email *youremail@example.com",
+    #         }
+    #     )
+    # )
+    # password1 = forms.CharField(
+    #     widget=forms.PasswordInput(
+    #         attrs={
+    #             "class": "form-control",
+    #             "placeholder": "Введите ваш пароль",
+    #         }
+    #     )
+    # )
+    # password2 = forms.CharField(
+    #     widget=forms.PasswordInput(
+    #         attrs={
+    #             "class": "form-control",
+    #             "placeholder": "Поддтвердите ваш пароль",
+    #         }
+    #     )
+    # )
 
 class UserLoginForm(AuthenticationForm):
 	class Meta:
@@ -28,7 +97,8 @@ class UserLoginForm(AuthenticationForm):
 		fields = ('username', 'password',)
 
 	"""
-	Переназначение полей. В первом случае просто оставляем пустыми, во втором добавляем всю необоходимую доп инфу:
+	Переназначение полей. В первом случае просто оставляем пустыми,
+	во втором добавляем всю необоходимую доп инфу:
 	плейсхолдеры и тд. Чтобы детально посмотреть как это деалется нажди на cntrl и левой кнобкой по AuthenticationForm
 	"""
 	# username = forms.CharField()
