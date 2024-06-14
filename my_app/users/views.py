@@ -1,10 +1,13 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from users.forms import UserLoginForm, UserRegistrationForm, ProfileForm
+from users.decorators import redirect_authenticated_user
 
+@redirect_authenticated_user
 def login(request):
 	if request.method == 'POST':
 		form = UserLoginForm(data=request.POST)
@@ -14,7 +17,7 @@ def login(request):
 			user = auth.authenticate(username=username, password=password)
 			if user:
 				auth.login(request, user)
-				return HttpResponseRedirect(reverse('main:index'))
+				return HttpResponseRedirect(reverse('user:profile'))
 	else:
 		form = UserLoginForm()
 
@@ -26,8 +29,8 @@ def login(request):
 
 	return render(request, 'users/login.html', context)
 
+@redirect_authenticated_user
 def registration(request):
-
 	if request.method == 'POST':
 		form = UserRegistrationForm(data=request.POST)
 		if form.is_valid():
@@ -38,7 +41,7 @@ def registration(request):
 			"""
 			user = form.instance
 			auth.login(request, user)
-			return HttpResponseRedirect(reverse('main:index'))
+			return redirect(reverse('main:index'))
 	else:
 		form = UserRegistrationForm()
 
@@ -49,6 +52,7 @@ def registration(request):
 
 	return render(request, 'users/registration.html', context)
 
+@login_required
 def profile(request):
 	if request.method == 'POST':
 		form = ProfileForm(data=request.POST, instance=request.user, files=request.FILES)
@@ -65,6 +69,7 @@ def profile(request):
 
 	return render(request, 'users/profile.html', context)
 
+@login_required
 def logout(request):
 	auth.logout(request)
-	return redirect(reverse('main:index'))
+	return redirect(reverse('user:login'))
