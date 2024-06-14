@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.shortcuts import redirect, render
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -17,6 +17,12 @@ def login(request):
 			user = auth.authenticate(username=username, password=password)
 			if user:
 				auth.login(request, user)
+				"""
+				Может быть много месседжей в контроллере в одночасье: worning, error и тдю
+				Поэтому в html разметке includes/notifications.html можно заметить цикл massage in messages
+				И так же. Это контекстная переменная, которая сама переедается в тимплейт, поэтому ее нет в контексте контроллера
+				"""
+				messages.success(request, f"{username}, you have successfully logged in!")
 				return redirect(reverse('user:profile'))
 	else:
 		form = UserLoginForm()
@@ -41,6 +47,7 @@ def registration(request):
 			"""
 			user = form.instance
 			auth.login(request, user)
+			messages.success(request, f"{user.username}, you have successfully registered!")
 			return redirect(reverse('main:index'))
 	else:
 		form = UserRegistrationForm()
@@ -58,6 +65,7 @@ def profile(request):
 		form = ProfileForm(data=request.POST, instance=request.user, files=request.FILES)
 		if form.is_valid():
 			form.save()
+			messages.success(request, "Your changes have been successfully applied!")
 			return redirect(reverse('user:profile'))
 	else:
 		form = ProfileForm(instance=request.user)
@@ -71,5 +79,6 @@ def profile(request):
 
 @login_required
 def logout(request):
+	messages.success(request, "You have successfully logged out!")
 	auth.logout(request)
 	return redirect(reverse('user:login'))

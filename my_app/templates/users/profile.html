@@ -20,8 +20,8 @@
                                 <div class="col-md-12 mb-3 text-center">
                                     {% if user.image  %}
                                         <img src="{{ user.image.url }}"
-                                        alt="User's avatar" class="img-fluid rounded-circle"
-                                        style="max-width: 150px;">
+                                        alt="User's avatar" class="img-fluid"
+                                        style="max-width: 150px; border-radius: 20%!important;">
                                     {% else %}
                                         <img src="{% static "/deps/images/baseavatar.jpg" %}"
                                         alt="User's avatar" class="img-fluid rounded-circle"
