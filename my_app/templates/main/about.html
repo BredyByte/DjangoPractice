@@ -5,6 +5,10 @@
     <link rel="stylesheet" href="{% static "deps/css/my_footer_css.css" %}">
 {% endblock  %}
 
+{% block modal_cart %}
+	{% include "includes/cart_button.html" %}
+{% endblock %}
+
 {% block  content %}
     <div class="mt-5 p-5 bg-light custom-shadow ">
         <h2 class="pt-5"><strong>{{ context }}</strong></h2>
