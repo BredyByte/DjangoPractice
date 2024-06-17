@@ -23,6 +23,11 @@ def login(request):
 				И так же. Это контекстная переменная, которая сама переедается в тимплейт, поэтому ее нет в контексте контроллера
 				"""
 				messages.success(request, f"{username}, you have successfully logged in!")
+
+				redirect_page = request.POST.get('next', None)
+				if redirect_page and redirect_page != reverse('user:logout'):
+					return redirect(request.GET.get('next'))
+
 				return redirect(reverse('user:profile'))
 	else:
 		form = UserLoginForm()
