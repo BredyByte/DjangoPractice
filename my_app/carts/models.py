@@ -34,4 +34,4 @@ class Cart(models.Model):
 		return round(self.product.display_discounted_price() * self.quantity, 2)
 
 	def __str__(self):
-		return f'Carito {self.user.username} | Producto {self.product.name} | Cantidad {self.quantity}'
+	    return f'Carito {self.user.username if self.user else "Anonim"} | Producto {self.product.name} | Cantidad {self.quantity}'
