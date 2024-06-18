@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 class Categories(models.Model):
 	name = models.CharField(max_length=150, unique=True, verbose_name='Titulo')
@@ -49,6 +50,11 @@ class Products(models.Model):
 
 	def display_id(self):
 		return f'{self.id:05}'
+
+	# После доболвения(Переоприделения) данной функции в админ
+	# панееле появляется кнопки(в каждом товаре) - посотреть на сайте
+	def get_absolute_url(self):
+		return reverse('catalog:product', kwargs={'product_slug': self.slug})
 
 	def display_discounted_price(self):
 		res = 0
