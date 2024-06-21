@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    "allauth.socialaccount.providers.github",
 
     'debug_toolbar',
 	'channels',
@@ -162,8 +163,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
 LOGIN_URL = '/user/login/'
 
+
 # for google auth
 SITE_ID = 2;
+ACCOUNT_EMAIL_VERIFICATION = "none"
 
 # for google auth
 AUTHENTICATION_BACKENDS = (
@@ -176,7 +179,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
-        "APPS": [
+        'APPS': [
             {
                 "client_id": config('GOOGLE_CLIENT_ID'),
                 "secret": config('GOOGLE_SECRET'),
@@ -190,5 +193,11 @@ SOCIALACCOUNT_PROVIDERS = {
         'AUTH_PARAMS': {
             'access_type': 'online',
         }
-    }
+    },
+    'github': {
+        'APP': {
+            'client_id': config('GITHUB_CLIENT_ID'),
+            'secret': config('GITHUB_SECRET'),
+        },
+    },
 }
