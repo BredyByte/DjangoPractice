@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load socialaccount %}
 
 {% block modal_cart %}
 	{% include "includes/cart_button.html" %}
@@ -40,17 +41,17 @@
                 <hr>
                 <div class="text-center">
                     <p>Log in via:</p>
-                    <a href="#" class="btn btn-dark">
-                        <img class="mx-1" src="{% static "/deps/icons/google.svg" %}" alt="Catalog Icon" width="16" height="16">
+                    <a href="{% provider_login_url 'google' %}?next=/" class="btn btn-dark">
+                        <img class="mx-1" src="{% static 'deps/icons/google.svg' %}" alt="Catalog Icon" width="16" height="16">
                         Google
                     </a>
                     <a href="#" class="btn btn-dark">
                         <img class="mx-1" src="{% static "/deps/icons/facebook.svg" %}" alt="Catalog Icon" width="16" height="16">
-                        Facebook
+                        Facebook (In development)
                     </a>
                     <a href="#" class="btn btn-dark">
                         <img class="mx-1" src="{% static "/deps/icons/github.svg" %}" alt="Catalog Icon" width="16" height="16">
-                        GitHub
+                        GitHub (In development)
                     </a>
                 </div>
             </div>
