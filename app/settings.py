@@ -91,17 +91,8 @@ TEMPLATES = [
     },
 ]
 
-
-# 658675871492-t76674867455hd8v2rvda1sqgd3m4i13.apps.googleusercontent.com
-
-
-# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=' # Add your client id here '
-# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '#Add your secret key here'
-# SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'http://localhost:8000/complete/google-oauth2/'
-
 WSGI_APPLICATION = 'app.wsgi.application'
 ASGI_APPLICATION = 'app.asgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
